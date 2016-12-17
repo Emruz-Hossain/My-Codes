@@ -1,0 +1,115 @@
+#include<stdio.h>
+int main()
+
+{
+    int l,n=0,w,i,j,k,x,f,m,y1=1414,t;
+    char ch;
+    scanf("%d",&x);
+if((x%400)==0||(x%4)==0 && (x%100)!=0)
+       f=31;
+else
+        f=30;
+    if(y1>=x)
+     {
+         for(i=x;i<y1;i++)
+          {
+            if((i%400)==0||(i%4)==0 && (i%100)!=0)
+            n++;
+          }
+         n=n+(y1-x);
+     }
+
+     else
+     {
+        for(i=y1;i<x;i++)
+       {
+        if((i%400)==0||(i%4)==0 && (i%100)!=0)
+        n++;
+       }
+        n=n+(x-y1);
+}
+    while(n>=7)
+       n=n-7;
+       if(x<y1)
+        n=7-n;
+    for(i=1;i<=12;i++)
+    {
+        printf("\n\n");
+        if(i==1)
+        {
+            printf("Baisakh\n");
+            m=31;
+        }
+        if(i==2)
+        {
+            printf("Jaistho\n");
+            m=31;
+        }
+        if(i==3)
+        {
+            printf("Asahar\n");
+            m=31;
+        }
+        if(i==4)
+        {
+            printf("Shraban\n");
+            m=31;
+        }
+        if(i==5)
+        {
+            printf("Bhadra\n");
+            m=31;
+        }
+        if(i==6)
+        {
+            printf("Aashin\n");
+            m=30;
+        }
+        if(i==7)
+        {
+            printf("Kartik\n");
+            m=30;
+        }
+        if(i==8)
+        {
+            printf("Agrahan\n");
+            m=30;
+        }
+        if(i==9)
+        {
+            printf("Poush\n");
+            m=30;
+        }
+        if(i==10)
+        {
+            printf("Maagh\n");
+            m=30;
+        }
+        if(i==11)
+        {
+            printf("phalgun\n");
+            m=f;
+        }
+        if(i==12)
+        {
+            printf("chaitra\n");
+            m=30;
+        }
+        printf("\nsun\tmon\ttues\twed\tthrus\tfri\tsat\n");
+        for(k=1;k<=n;k++)
+            printf("   \t");
+        for(j=1;j<=m;j++)
+        {
+            printf("%3d\t",j);
+            n++;
+            if(n==7)
+            {
+                if(j==m);
+                else
+                printf("\n\n");
+                n=0;
+            }
+
+        }
+    }
+}

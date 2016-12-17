@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1402909242 source:e:\problem\codes\debug\main.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<algorithm>
+	<string>
+	<map>
+	<queue>
+	<vector>
+	<iostream>
+
+1456851423 source:f:\codes\debug\main.cpp
+	<bits/stdc++.h>
+

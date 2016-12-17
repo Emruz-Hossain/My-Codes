@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char b[1000];
+    int a[100][100],i,t,n,j,k,p,q,c,x,len,l;
+    scanf("%d",&t);
+    for(i=0;i<t;i++)
+    {
+        scanf("%d",&n);
+        for(j=0;j<n;j++)
+            for(k=0;k<2;k++)
+        {
+            scanf("%d",&a[j][k]);
+        }
+        p=a[0][0];
+        q=a[0][1];
+        l=1;
+        c=0;
+        x=0;
+        while(1)
+        {
+            if(p==a[j-1][0]&&q==a[j-1][1])
+                break;
+                c++;
+            if(p<a[l][0]||q<a[l][1])
+            {
+                if(p<a[l][0])
+                {
+                    p++;
+                    b[x]='L';
+                    b[x+1]='+';
+                    x++;
+                }
+                else
+                {
+                    q++;
+                    b[x]='R';
+                    b[x+1]='+';
+                    x++;
+                }
+            }
+            else
+            {
+                if(p>a[l][0])
+                {
+                    p--;
+                    b[x]='L';
+                    b[x+1]='-';
+                    x++;
+                }
+                else
+                {
+                    q--;
+                    b[x]='R';
+                    b[x+1]='-';
+                    x++;
+                }
+            }
+        }
+        b[x]='\0';
+        len=strlen(b);
+        printf("%d\n",c);
+        for(i=0;i<len;i++)
+            printf("%c",b[i]);
+        printf("\n");
+    }
+    return 0;
+}

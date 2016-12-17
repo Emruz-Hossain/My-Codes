@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+1399286795 source:e:\problem\codes\asd\main.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<algorithm>
+	<string>
+	<map>
+	<queue>
+	<vector>
+	<iostream>
+
+1423063438 
+
+1393926129 source:f:\problem\codes\asd\main.cpp
+	<stdio.h>
+	<string.h>
+
+1399286795 source:e:\codes\codes\asd\main.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<algorithm>
+	<string>
+	<map>
+	<queue>
+	<vector>
+	<iostream>
+
+1423063438 source:e:\codes\asd\main.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<algorithm>
+	<string>
+	<map>
+	<queue>
+	<stack>
+	<vector>
+	<set>
+	<iostream>
+	<iomanip>
+	<ctime>
+
+1423063749 source:/media/emruz/Programming/Codes/asd/main.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<algorithm>
+	<string>
+	<map>
+	<queue>
+	<stack>
+	<vector>
+	<set>
+	<iostream>
+	<iomanip>
+	<ctime>
+
+1439221238 source:d:\codes\asd\main.cpp
+	<bits/stdc++.h>
+
+1454222518 source:f:\codes\asd\main.cpp
+	<bits/stdc++.h>
+
