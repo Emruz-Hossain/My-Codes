@@ -116,7 +116,7 @@ int dijkstra(int n)
         for(int i=0;i<(int)g[u].size();i++)
         {
             int v=g[u][i];
-            if(d[u]+cost[u][i]<d[v])
+            if(d[u]+cost[u][i]<d[v]   )
             {
                 d[v]=d[u]+cost[u][i];
                 par[v]=u;
