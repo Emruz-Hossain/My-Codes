@@ -86,117 +86,34 @@ double ART(P ae,P be){return crp(ae,be)/2.0;}
  P rot(P ae,double ang){return P(ae.x*cos(ang)-ae.y*sin(ang),ae.y*cos(ang)+ae.x*sin(ang));}
 
  /*****************************Code start from here**************************/
-const int sz=1005;
-int visit[5][sz][sz][3],n,m;
-char ss[sz][sz];
-void rec(int dir,int x,int y,int turn)
-{
-    int t, d;
-    if (turn > 2)
-        return;
-    if(y+1<m&&ss[x][y+1]!='*')
-    {
-        t = turn;
-        d = dir;
-        if (dir == 0 || dir == 1)
-        {
-          if(visit[d][x][y+1][t]==0)
-          {
-              visit[d][x][y + 1][t] = 1;
-              rec(d, x, y + 1, t);
-          }
-        }
-        else
-        {
-           if(visit[1][x][y+1][turn+1]==0&&turn+1<=2)
-           {
-               visit[1][x][y + 1][turn + 1] = 1;
-               rec(1, x, y +1, turn + 1);
-           }
-        }
-    }
-    if(y-1>=0&&ss[x][y-1]!='*')
-    {
-        if((dir==0||dir==3)&&visit[3][x][y-1][turn]==0)
-        {
-            visit[3][x][y - 1][turn] = 1;
-            rec(3, x, y - 1, turn);
-        }
-        else
-        {
-            if(visit[3][x][y-1][turn+1]==0&&turn+1<=2)
-            {
-                visit[3][x][y - 1][turn + 1] = 1;
-                rec(3, x, y - 1, turn + 1);
-            }
-        }
-    }
-    if(x+1<n&&ss[x+1][y]!='*')
-    {
-        if((dir==0||dir==2)&&visit[2][x+1][y][turn]==0)
-        {
-            visit[2][x+1][y][turn] = 1;
-            rec(2, x+1, y, turn);
-        }
-        else
-        {
-            if(visit[2][x+1][y][turn+1]==0&&turn+1<=2)
-            {
-                visit[2][x+1][y][turn + 1] = 1;
-                rec(2, x+1, y, turn + 1);
-            }
-        }
-    }
-    if(x-1>=0&&ss[x-1][y]!='*')
-    {
-        if((dir==0||dir==4)&&visit[4][x-1][y][turn]==0)
-        {
-            visit[4][x-1][y][turn] = 1;
-            rec(4, x-1, y, turn);
-        }
-        else
-        {
-            if(visit[4][x-1][y][turn+1]==0&&turn+1<=2)
-            {
-                visit[4][x-1][y][turn + 1] = 1;
-                rec(4, x-1, y, turn + 1);
-            }
-        }
-    }
-}
+const int sz=100005;
+ll ar[sz];
 int main()
 {
     //    freopen("output.txt","w",stdout);
     //    freopen("xinput.txt","r",stdin);
    //ios_base::sync_with_stdio(false);
-   int a,b,c,d,h,p,x,y,i,j,k,l,q,r,t,cnt,sm,tmp;
-   sf("%d %d", &n, &m);
-   for (i = 0; i < n;i++)
+   ll a,b,c,d,h,m,n,p,x,y,i,j,k,l,q,r,t,cnt,sm,tmp;
+   sf("%lld %lld", &n, &k);
+   for (i = 0;i<n;i++)
    {
-       sf("%s",&ss[i]);
-       pf("Scanning...\n");
-       for (j = 0; j < m;j++)
-        {
-            if(ss[i][j]=='S')
-                {
-                    x = i;
-                    y = j;
-                }
-            if(ss[i][j]=='T')
-            {
-                a = i;
-                b = j;
-            }
-        }
+       sf("%lld", &ar[i]);
    }
-   mem(visit, 0);
-   rec(0,x, y, 0);
-   if(visit[1][a][b][0]||visit[2][a][b][0]||visit[3][a][b][0]||visit[4][a][b][0]||visit[1][a][b][1]||visit[2][a][b][1]||visit[3][a][b][1]||visit[4][a][b][1]||visit[1][a][b][2]||visit[2][a][b][2]||visit[3][a][b][2]||visit[4][a][b][2])
+   sort(ar, ar + n);
+   cnt = 0;
+   for (i = 1; i < n; i++)
    {
-       pf("YES\n");
+       if((ar[i]-ar[0])%k==0)
+       {
+           cnt += (ar[i] - ar[0]) / k;
+       }
+       else
+       {
+           pf("-1\n");
+           return 0;
+       }
    }
-   else
-       pf("NO\n");
+   pf("%lld\n", cnt);
    return 0;
 }
 

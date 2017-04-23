@@ -97,13 +97,12 @@ void rec(int dir,int x,int y,int turn)
     if(y+1<m&&ss[x][y+1]!='*')
     {
         t = turn;
-        d = dir;
         if (dir == 0 || dir == 1)
         {
-          if(visit[d][x][y+1][t]==0)
+          if(visit[1][x][y+1][t]==0)
           {
-              visit[d][x][y + 1][t] = 1;
-              rec(d, x, y + 1, t);
+              visit[1][x][y + 1][t] = 1;
+              rec(1, x, y + 1, t);
           }
         }
         else
@@ -173,8 +172,7 @@ int main()
    sf("%d %d", &n, &m);
    for (i = 0; i < n;i++)
    {
-       sf("%s",&ss[i]);
-       pf("Scanning...\n");
+       sf("%s",ss[i]);
        for (j = 0; j < m;j++)
         {
             if(ss[i][j]=='S')
