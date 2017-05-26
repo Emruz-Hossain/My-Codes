@@ -86,89 +86,54 @@ double ART(P ae,P be){return crp(ae,be)/2.0;}
  P rot(P ae,double ang){return P(ae.x*cos(ang)-ae.y*sin(ang),ae.y*cos(ang)+ae.x*sin(ang));}
 
  /*****************************Code start from here**************************/
-const int sz=100005;
-struct points{
-    double x, y, w;
-} ar[sz];
-int n;
-double ansx, ansy;
-void cal(double x, double ly, double hy)
+const int sz=105;
+int n, m;
+char ss[sz][sz];
+int findSize(int x,int y)
 {
-    double sm = 0.0,mid1,mid2,cnt1,cnt2;
-    int i, j;
-    for (i = 0; i < 10000; i++)
+    int cnt = 1,ly=y-1,ry=y+1;
+    x++;
+    while (x < n && ly >= 0 && ry < m)
     {
-        mid1 = ly+(hy-ly)/3.0;
-        mid2 = hy - (hy-ly) / 3;
-        cnt1 = cnt2 = 10000000.0;
-        for (j = 0; j < n; j++)
+        int tmp = 0;
+        for (int i = ly; i <= ry;i++)
         {
-            cnt1 = min(cnt1, (mid1 - ar[j].y) * ar[j].w);
+            if(ss[x][i]=='#')
+                tmp++;
+            else
+                return cnt;
         }
-        for (j = 0; j < n; j++)
-        {
-            cnt2 = min(cnt2, (mid2 - ar[j].y) * ar[j].w);
-        }
-        if(cnt1<cnt2)
-        {
-            hy = mid2;
-        }
-        else
-        {
-            ly = mid1;
-        }
+        cnt += tmp;
+        ly--;
+        ry++;
+        x++;
     }
-    ansy = ly;
+    return cnt;
 }
 int main()
 {
-    //    freopen("output.txt","w",stdout);
-    //    freopen("xinput.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+        freopen("C-small-attempt0.in","r",stdin);
    //ios_base::sync_with_stdio(false);
-   int a,b,c,d,h,m,p,x,y,i,j,k,l,q,r,t,cnt,tmp;
+   int a,b,c,d,h,p,x,y,i,j,k,l,q,r,t,cnt,sm,tmp;
    sf("%d", &t);
    for (x = 1; x <= t;x++)
    {
-       sf("%d", &n);
-       double lx = 10000.0, ly = 10000.0, hx = -10000.0, hy = -10000.0,sm;
+       cnt = 0;
+       sf("%d %d %d", &n, &m, &k);
+       for (i = 0; i < n;i++)
+           sf("%s", ss[i]);
        for (i = 0; i < n;i++)
        {
-           sf("%lf %lf %lf", &ar[i].x, &ar[i].y, &ar[i].w);
-           lx = min(lx, ar[i].x);
-           ly = min(ar[i].y, ly);
-           hx = max(ar[i].x, hx);
-           hy = max(ar[i].y, hy);
+           for (j = 0; j < m;j++)
+           {
+               if(ss[i][j]=='#')
+               {
+                   cnt = max(cnt, findSize(i, j));
+               }
+           }
        }
-       double mid1, mid2,cnt1,cnt2;
-       for (i = 0; i < 100; i++)
-       {
-           mid1 = lx + (hx - lx) / 3.0;
-           mid2 = hx - (hx - lx) / 3.0;
-        cnt1 = cnt2 = 10000000.0;
-        for (j = 0; j < n; j++)
-        {
-            cnt1 = min(cnt1, (mid1 - ar[j].x) * ar[j].w);
-        }
-        for (j = 0; j < n; j++)
-        {
-            cnt2 = min(cnt2, (mid2 - ar[j].x) * ar[j].w);
-        }
-        if(cnt1<cnt2)
-        {
-            hx = mid2;
-        }
-        else
-        {
-            lx = mid1;
-        }
-       }
-       ansx = hx;
-       cal(hx,ly,hy);
-       sm = 0.0;
-       pf("%lf %lf\n", ansx, ansy);
-       for (i = 0; i < n; i++)
-           sm += max(abs(ansx - ar[i].x), ansy - ar[i].y) * ar[i].w;
-       pf("Case #%d: %.9lf\n", x, sm);
+       pf("Case #%d: %d\n", x, cnt);
    }
 
    return 0;

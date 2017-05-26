@@ -87,90 +87,36 @@ double ART(P ae,P be){return crp(ae,be)/2.0;}
 
  /*****************************Code start from here**************************/
 const int sz=100005;
-struct points{
-    double x, y, w;
-} ar[sz];
-int n;
-double ansx, ansy;
-void cal(double x, double ly, double hy)
-{
-    double sm = 0.0,mid1,mid2,cnt1,cnt2;
-    int i, j;
-    for (i = 0; i < 10000; i++)
-    {
-        mid1 = ly+(hy-ly)/3.0;
-        mid2 = hy - (hy-ly) / 3;
-        cnt1 = cnt2 = 10000000.0;
-        for (j = 0; j < n; j++)
-        {
-            cnt1 = min(cnt1, (mid1 - ar[j].y) * ar[j].w);
-        }
-        for (j = 0; j < n; j++)
-        {
-            cnt2 = min(cnt2, (mid2 - ar[j].y) * ar[j].w);
-        }
-        if(cnt1<cnt2)
-        {
-            hy = mid2;
-        }
-        else
-        {
-            ly = mid1;
-        }
-    }
-    ansy = ly;
-}
+ll ar[sz];
 int main()
 {
     //    freopen("output.txt","w",stdout);
     //    freopen("xinput.txt","r",stdin);
    //ios_base::sync_with_stdio(false);
-   int a,b,c,d,h,m,p,x,y,i,j,k,l,q,r,t,cnt,tmp;
-   sf("%d", &t);
-   for (x = 1; x <= t;x++)
+   ll a,b,c,d,h,m,n,p,x,y,i,j,k,l,q,r,t,cnt,sm,tmp;
+   cin >> n >> h >> t;
+   for (i = 0; i < n;i++)
+       cin >> ar[i];
+   sort(ar, ar + n);
+   i = 0;
+   cnt = 0;
+//    cout << n << " " << t << endl;
+   while(i < n && t >= 0)
    {
-       sf("%d", &n);
-       double lx = 10000.0, ly = 10000.0, hx = -10000.0, hy = -10000.0,sm;
-       for (i = 0; i < n;i++)
+       d = ar[i] / h;
+       if(d*h<ar[i])
+           d++;
+       if(d<=t)
        {
-           sf("%lf %lf %lf", &ar[i].x, &ar[i].y, &ar[i].w);
-           lx = min(lx, ar[i].x);
-           ly = min(ar[i].y, ly);
-           hx = max(ar[i].x, hx);
-           hy = max(ar[i].y, hy);
+           cnt++;
+           t -= d;
        }
-       double mid1, mid2,cnt1,cnt2;
-       for (i = 0; i < 100; i++)
-       {
-           mid1 = lx + (hx - lx) / 3.0;
-           mid2 = hx - (hx - lx) / 3.0;
-        cnt1 = cnt2 = 10000000.0;
-        for (j = 0; j < n; j++)
-        {
-            cnt1 = min(cnt1, (mid1 - ar[j].x) * ar[j].w);
-        }
-        for (j = 0; j < n; j++)
-        {
-            cnt2 = min(cnt2, (mid2 - ar[j].x) * ar[j].w);
-        }
-        if(cnt1<cnt2)
-        {
-            hx = mid2;
-        }
-        else
-        {
-            lx = mid1;
-        }
-       }
-       ansx = hx;
-       cal(hx,ly,hy);
-       sm = 0.0;
-       pf("%lf %lf\n", ansx, ansy);
-       for (i = 0; i < n; i++)
-           sm += max(abs(ansx - ar[i].x), ansy - ar[i].y) * ar[i].w;
-       pf("Case #%d: %.9lf\n", x, sm);
+       else
+           break;
+       i++;
+    //    cout << "working" << endl;
    }
-
+   cout << cnt<<endl;
    return 0;
 }
 

@@ -100,16 +100,16 @@ void cal(double x, double ly, double hy)
     {
         mid1 = ly+(hy-ly)/3.0;
         mid2 = hy - (hy-ly) / 3;
-        cnt1 = cnt2 = 10000000.0;
+        cnt1 = cnt2 = -10000000.0;
         for (j = 0; j < n; j++)
         {
-            cnt1 = min(cnt1, (mid1 - ar[j].y) * ar[j].w);
+            cnt1 = max(cnt1, abs(mid1 - ar[j].y) * ar[j].w);
         }
         for (j = 0; j < n; j++)
         {
-            cnt2 = min(cnt2, (mid2 - ar[j].y) * ar[j].w);
+            cnt2 = max(cnt2, abs(mid2 - ar[j].y) * ar[j].w);
         }
-        if(cnt1<cnt2)
+        if(abs(cnt1)<abs(cnt2))
         {
             hy = mid2;
         }
@@ -123,7 +123,7 @@ void cal(double x, double ly, double hy)
 int main()
 {
     //    freopen("output.txt","w",stdout);
-    //    freopen("xinput.txt","r",stdin);
+        freopen("xinput.txt","r",stdin);
    //ios_base::sync_with_stdio(false);
    int a,b,c,d,h,m,p,x,y,i,j,k,l,q,r,t,cnt,tmp;
    sf("%d", &t);
@@ -139,35 +139,35 @@ int main()
            hx = max(ar[i].x, hx);
            hy = max(ar[i].y, hy);
        }
-       double mid1, mid2,cnt1,cnt2;
-       for (i = 0; i < 100; i++)
+       double mid1, mid2,prev=0.0,cur;
+       for (j = 0; j < n; j++)
+        {
+            prev += abs(lx - ar[j].x) * ar[j].w;
+        }
+       for (i = 0; i < 50; i++)
        {
-           mid1 = lx + (hx - lx) / 3.0;
-           mid2 = hx - (hx - lx) / 3.0;
-        cnt1 = cnt2 = 10000000.0;
-        for (j = 0; j < n; j++)
-        {
-            cnt1 = min(cnt1, (mid1 - ar[j].x) * ar[j].w);
+           mid1 = (lx + hx) / 2.0;
+           cur = 0;
+           for (j = 0; j < n; j++)
+           {
+               cur +=  abs(mid1 - ar[j].x) * ar[j].w;
         }
-        for (j = 0; j < n; j++)
+        if(cur<prev)
         {
-            cnt2 = min(cnt2, (mid2 - ar[j].x) * ar[j].w);
-        }
-        if(cnt1<cnt2)
-        {
-            hx = mid2;
+            lx = mid1;
+            prev = cur;
         }
         else
         {
-            lx = mid1;
+            hx = mid1;
         }
        }
        ansx = hx;
        cal(hx,ly,hy);
        sm = 0.0;
-       pf("%lf %lf\n", ansx, ansy);
+      pf("%lf %lf\n", ansx, ansy);
        for (i = 0; i < n; i++)
-           sm += max(abs(ansx - ar[i].x), ansy - ar[i].y) * ar[i].w;
+           sm += max(abs(ansx - ar[i].x), abs(ansy - ar[i].y)) * ar[i].w;
        pf("Case #%d: %.9lf\n", x, sm);
    }
 

@@ -1,0 +1,1 @@
+g++ test.cpp -lglut -lGL; and ./a.out
