@@ -87,89 +87,89 @@ double ART(P ae,P be){return crp(ae,be)/2.0;}
 
  /*****************************Code start from here**************************/
 const int sz=100005;
-struct points{
-    double x, y, w;
-} ar[sz];
-int n;
-double ansx, ansy;
-void cal(double x, double ly, double hy)
+struct st{
+    int s, e, idx,os,oe;
+};
+vector<st> V,V2;
+vector<string> S;
+string ans, sp,ss;
+
+bool cmp(st a, st b)
 {
-    double sm = 0.0,mid1,mid2,cnt1,cnt2;
-    int i, j;
-    for (i = 0; i < 10000; i++)
-    {
-        mid1 = ly+(hy-ly)/3.0;
-        mid2 = hy - (hy-ly) / 3;
-        cnt1 = cnt2 = -10000000.0;
-        for (j = 0; j < n; j++)
-        {
-            cnt1 = max(cnt1, abs(mid1 - ar[j].y) * ar[j].w);
-        }
-        for (j = 0; j < n; j++)
-        {
-            cnt2 = max(cnt2, abs(mid2 - ar[j].y) * ar[j].w);
-        }
-        if(abs(cnt1)<abs(cnt2))
-        {
-            hy = mid2;
-        }
-        else
-        {
-            ly = mid1;
-        }
-    }
-    ansy = ly;
+       if (a.s < b.s)
+           return true;
+       else if (a.s > b.s)
+           return false;
+       else
+           return a.e > b.e;
 }
 int main()
 {
-    //    freopen("output.txt","w",stdout);
-        freopen("xinput.txt","r",stdin);
-   //ios_base::sync_with_stdio(false);
-   int a,b,c,d,h,m,p,x,y,i,j,k,l,q,r,t,cnt,tmp;
-   sf("%d", &t);
-   for (x = 1; x <= t;x++)
+       freopen("output.txt","w",stdout);
+         freopen("xinput.txt","r",stdin);
+   ios_base::sync_with_stdio(false);
+   int a,b,c,d,h,m,n,p,x,y,i,j,k,l,q,r,t,cnt,sm,tmp;
+  cin>>t;
+   m = 0;
+
+    st aa;
+   for (a = 0; a < t; a++)
    {
-       sf("%d", &n);
-       double lx = 10000.0, ly = 10000.0, hx = -10000.0, hy = -10000.0,sm;
-       for (i = 0; i < n;i++)
+       cin >> ss >> k;
+       l = ss.size();
+       S.push_back(ss);
+       for (i = 0; i < k; i++)
        {
-           sf("%lf %lf %lf", &ar[i].x, &ar[i].y, &ar[i].w);
-           lx = min(lx, ar[i].x);
-           ly = min(ar[i].y, ly);
-           hx = max(ar[i].x, hx);
-           hy = max(ar[i].y, hy);
+           cin >> x;
+           aa.s = aa.os = x;
+           aa.e = aa.oe=x + l-1;
+           aa.idx = a;
+           V.push_back(aa);
+           m = max(m, aa.e);
        }
-       double mid1, mid2,prev=0.0,cur;
-       for (j = 0; j < n; j++)
-        {
-            prev += abs(lx - ar[j].x) * ar[j].w;
-        }
-       for (i = 0; i < 50; i++)
-       {
-           mid1 = (lx + hx) / 2.0;
-           cur = 0;
-           for (j = 0; j < n; j++)
-           {
-               cur +=  abs(mid1 - ar[j].x) * ar[j].w;
-        }
-        if(cur<prev)
-        {
-            lx = mid1;
-            prev = cur;
-        }
-        else
-        {
-            hx = mid1;
-        }
-       }
-       ansx = hx;
-       cal(hx,ly,hy);
-       sm = 0.0;
-      pf("%lf %lf\n", ansx, ansy);
-       for (i = 0; i < n; i++)
-           sm += max(abs(ansx - ar[i].x), abs(ansy - ar[i].y)) * ar[i].w;
-       pf("Case #%d: %.9lf\n", x, sm);
    }
+   sort(V.begin(), V.end(), cmp);
+   for (i = 0; i < V.size();i++)
+   {
+       if(V2.size()==0)
+       {
+           V2.push_back(V[i]);
+       }
+       else
+       {
+           aa = V2.back();
+           st bb = V[i];
+           if(bb.e<=aa.e)
+               continue;
+            else if(bb.s>aa.e)
+                V2.push_back(bb);
+            else
+                {
+                    bb.s = aa.e + 1;
+                    if(bb.s<=bb.e)
+                        V2.push_back(bb);
+                }
+       }
+   }
+   ans = "";
+   for (i = 0; i < m; i++)
+   {
+       ans += "a";
+   }
+   //cout << ans<<endl;
+   for (i = 0; i < V2.size(); i++)
+   {
+       aa = V2[i];
+       //cout<<aa.s<<"-"<<aa.e<<endl;
+       sp = S[aa.idx];
+       for (j = aa.s,d=aa.s-aa.os; j <= aa.e;j++,d++)
+       {
+        ans[j-1] = sp[d];
+       }
+       //cout << aa.s << " " << aa.e <<" "<<aa.s-aa.os<< endl;
+       //cout << ans << endl;
+   }
+   cout << ans << endl;
 
    return 0;
 }

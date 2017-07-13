@@ -20,7 +20,7 @@ long long a,b;
 int visit[1005][1005], vx = 500, vy = 500;
 int R[] = {-1,0,1,0,-1,1,1,-1};
 int C[] = {0,1,0,-1,1,1,-1,-1};
-void boundaryFill(int x,int y)
+void floodFill(int x,int y)
 {
     int xp = 0, yp = 0;
     while(visit[xp+vx][vy]==0)
@@ -127,7 +127,7 @@ void displayEllipse(void)
         visit[-x + vx][y + vy] = -1;
     }
     glColor3f(0.5, 0.5, 0.8);
-    boundaryFill(0, 0);
+    floodFill(0, 0);
     glEnd();
     glFlush();
 }
